@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "lint": "tslint -c tslint.json --fix '*.ts*'",
+    "prettier": "prettier --write '*.ts*'"
   },
   "dependencies": {
     "react": "16.8.3",
@@ -20,14 +22,20 @@
     "babel-jest": "^24.5.0",
     "babel-plugin-react-native-classname-to-style": "^1.2.2",
     "babel-plugin-react-native-platform-specific-extensions": "^1.1.1",
+    "husky": ">=1",
     "jest": "^24.5.0",
     "jest-css-modules-transform": "^2.5.0",
+    "lint-staged": ">=8",
     "metro-react-native-babel-preset": "^0.53.0",
     "node-sass": "^4.11.0",
+    "prettier": "^1.18.2",
     "react-native-sass-transformer": "^1.4.0",
     "react-native-typescript-transformer": "^1.2.12",
     "react-test-renderer": "16.8.3",
     "ts-jest": "^24.0.0",
+    "tslint": "^5.18.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-react-native": "^0.0.7",
     "typescript": "^3.3.3333"
   },
   "jest": {
@@ -47,5 +55,16 @@
       "<rootDir>/node_modules/"
     ],
     "cacheDirectory": ".jest/cache"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
   }
 }
